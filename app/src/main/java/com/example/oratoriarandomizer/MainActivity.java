@@ -12,57 +12,70 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import java.util.Random;
 
+import com.example.oratoriarandomizer.Phrase;
+
 public class MainActivity extends AppCompatActivity {
+
+    Phrase[] phrases = new Phrase[28];
+    Phrase[] phrasesStance = phrases;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initializePhrases();
     }
 
-    public void randomNum(View view) {
+    public void initializePhrases() {
+        phrases[0] = new Phrase(1,"Epícuro: \"Cuanto más grande es la dificultad, más gloria hay en superarla\".",true,9901,8801);
+        phrases[1] = new Phrase(2,"Soren Kierkegaard: \"La vida debe ser comprendida hacia atrás. Pero debe ser vivida hacia delante\".",true,9902,8802);
+        phrases[2] = new Phrase(3,"Jean-Paul Sartre: \"El hombre está condenado a ser libre\".",true,9903,8803);
+        phrases[3] = new Phrase(4,"Anaxágoras: \"En todo hay una parte de todo\".",true,9904,8804);
+        phrases[4] = new Phrase(5,"Demócrito: \"El hombre valiente es el que no solo supera a sus enemigos, sino también a sus placeres\".",true,9905,8805);
+        phrases[5] = new Phrase(6,"Erich Fromm: \"La creatividad requiere que la valentía se desprenda de las certezas\".",true,9906,8806);
+        phrases[6] = new Phrase(7,"Edmund Burke: \"Aquellos que no conocen la historia están condenados a repetirla\".",true,9907,8807);
+        phrases[7] = new Phrase(8,"Dante: \"De una pequeña chispa puede prender una llama\".",true,9908,8808);
+        phrases[8] = new Phrase(9,"Gandhi: \"Nadie puede herirme sin mi permiso\".",true,9909,8809);
+        phrases[9] = new Phrase(10,"Spinoza: \"Puedo controlar mis pasiones y emociones si puedo entender su naturaleza\".",true,9910,8810);
+        phrases[10] = new Phrase(11,"Sergio Rodríguez Abitia: \"El turismo tiene como objetivo la construcción de mejores personas y no de mejores fortunas\".",true,9911,8811);
+        phrases[11] = new Phrase(12,"John Maynard Keynes: \"El mercado puede permanecer irracional más tiempo del que usted puede permanecer solvente\".",true,9912,8812);
+        phrases[12] = new Phrase(13,"Gary Vaynerchuk: \"Por favor, piense en su legado, porque lo está escribiendo todos los días\".",true,9913,8813);
+        phrases[13] = new Phrase(14,"Stephen Covey: \"El liderazgo efectivo es poner primero lo primero. La gestión eficaz es la disciplina llevada a cabo\".",true,9914,8814);
+        phrases[14] = new Phrase(15,"John D. Rockefeller: \"Una buena gestión consiste en mostrar a gente promedio cómo hacer el trabajo de gente superior\".",true,9915,8815);
+        phrases[15] = new Phrase(16,"Peter F. Drucker: \"Lo que se mide mejora\".",true,9916,8816);
+        phrases[16] = new Phrase(17,"Jeff Bezos: \"Tu marca es lo que la gente dice de ti cuando no estás en la sala\".",true,99176,8817);
+        phrases[17] = new Phrase(18,"Lao Tsé: \"No hay que ir para atrás ni para darse impulso\".",true,9918,8818);
+        phrases[18] = new Phrase(19,"Charles Baudelaire: \"Para trabajar basta estar convencido de una cosa: que trabajar es menos aburrido que divertirse\".",true,9919,8819);
+        phrases[19] = new Phrase(20,"Jacinto Benavente: \"Lo peor que hacen los malos es obligarnos a dudar de los buenos\".",true,9920,8820);
+        phrases[20] = new Phrase(21,"Confucio: \"Aprende a vivir y sabrás morir bien\".",true,9921,8821);
+        phrases[21] = new Phrase(22,"Albert Einstein: \"Cada día sabemos más y entendemos menos\".",true,9922,8822);
+        phrases[22] = new Phrase(23,"Elizabeth Gilbert: \"El conocimiento es una brújula que te guía en la oscuridad\".",true,9923,8823);
+        phrases[23] = new Phrase(24,"Sócrates: \"La verdadera sabiduría está en reconocer la propia ignorancia\".",true,9924,8824);
+        phrases[24] = new Phrase(25,"Robert Collier: \"El éxito es el resultado de pequeños esfuerzos repetidos día tras día\".",true,9925,8825);
+        phrases[25] = new Phrase(26,"Fyodor Dostoyevski: \"El hombre se complace en enumerar sus pesares, pero no enumera sus alegrías\".",true,9926,8826);
+        phrases[26] = new Phrase(27,"Herman Hesse: \"El pájaro pelea hasta que consigue salir del huevo. El huevo es su mundo. Todo ser viviente debería intentar destruir el mundo\".",true,9927,8827);
+        phrases[27] = new Phrase(28,"Mark Twain: \"No hay una visión más triste que la de un joven pesimista\".",true,9928,8828);
+    }
+
+    public void randomPhrase(View view) {
 
         // Declarar variables
         Button btnGenerate = findViewById(R.id.btnGenerate);
         TextView txtRandomNum = findViewById(R.id.txtRandomNum);
         TextView txtPhrase = findViewById(R.id.txtPhrase);
-        String[] phrases = {
-                "Epícuro: \"Cuanto más grande es la dificultad, más gloria hay en superarla\".",
-                "Soren Kierkegaard: \"La vida debe ser comprendida hacia atrás. Pero debe ser vivida hacia delante\".",
-                "Jean-Paul Sartre: \"El hombre está condenado a ser libre\".",
-                "Demócrito: \"El hombre valiente es el que no solo supera a sus enemigos, sino también a sus placeres\".",
-                "Erich Fromm: \"La creatividad requiere que la valentía se desprenda de las certezas\".",
-                "Edmund Burke: \"Aquellos que no conocen la historia están condenados a repetirla\".",
-                "Dante: \"De una pequeña chispa puede prender una llama\".",
-                "Gandhi: \"Nadie puede herirme sin mi permiso\".",
-                "Spinoza: \"Puedo controlar mis pasiones y emociones si puedo entender su naturaleza\".",
-                "Sergio Rodríguez Abitia: \"El turismo tiene como objetivo la construcción de mejores personas y no de mejores fortunas\".",
-                "John Maynard Keynes: \"El mercado puede permanecer irracional más tiempo del que usted puede permanecer solvente\".",
-                "Gary Vaynerchuk: \"Por favor, piense en su legado, porque lo está escribiendo todos los días\".",
-                "Stephen Covey: \"El liderazgo efectivo es poner primero lo primero. La gestión eficaz es la disciplina llevada a cabo\".",
-                "John D. Rockefeller: \"Una buena gestión consiste en mostrar a gente promedio cómo hacer el trabajo de gente superior\".",
-                "Peter F. Drucker: \"Lo que se mide mejora\".",
-                "Jeff Bezos: \"Tu marca es lo que la gente dice de ti cuando no estás en la sala\".",
-                "Lao Tsé: \"No hay que ir para atrás ni para darse impulso\".",
-                "Charles Baudelaire: \"Para trabajar basta estar convencido de una cosa: que trabajar es menos aburrido que divertirse\".",
-                "Jacinto Benavente: \"Lo peor que hacen los malos es obligarnos a dudar de los buenos\".",
-                "Confucio: \"Aprende a vivir y sabrás morir bien\".",
-                "Albert Einstein: \"Cada día sabemos más y entendemos menos\".",
-                "Elizabeth Gilbert: \"El conocimiento es una brújula que te guía en la oscuridad\".",
-                "Sócrates: \"La verdadera sabiduría está en reconocer la propia ignorancia\".",
-                "Robert Collier: \"El éxito es el resultado de pequeños esfuerzos repetidos día tras día\".",
-                "Fyodor Dostoyevski: \"El hombre se complace en enumerar sus pesares, pero no enumera sus alegrías\".",
-                "Herman Hesse: \"El pájaro pelea hasta que consigue salir del huevo. El huevo es su mundo. Todo ser viviente debería intentar destruir el mundo\".",
-                "Mark Twain: \"No hay una visión más triste que la de un joven pesimista\"."
-        };
-        //Crear instancia de "phrases" para modificar el array
-        String[] phrasesStance = phrases;
+        int randomNumber;
+        int posArray;
 
-        // Generar un numero aleatorio del 1 al 28
-        int randomNumber = generateRandomNum(1, 28);
-        // Mostrar el numero aleatorio y frase en los TextView
-        txtRandomNum.setText(String.valueOf(randomNumber));
-        txtPhrase.setText(phrasesStance[randomNumber - 1]);
+        // Generar un numero aleatorio del 1 al 28 que este habilitado
+        do {
+            randomNumber = generateRandomNum(1, 28);
+            posArray = randomNumber - 1;
+        } while (!phrasesStance[posArray].isHab());
+
+        txtRandomNum.setText(String.valueOf(randomNumber)); //Muesta el numero generado
+        txtPhrase.setText(phrasesStance[posArray].getPhrase()); //Muestra la frase designada
+        phrasesStance[posArray].changeHab();//Deshabilita la frase
     }
 
     private int generateRandomNum(int min, int max) {
