@@ -57,7 +57,10 @@ public class MainActivity extends AppCompatActivity {
         phrases[26] = new Phrase(27,"Herman Hesse: \"El pájaro pelea hasta que consigue salir del huevo. El huevo es su mundo. Todo ser viviente debería intentar destruir el mundo\".",true,9927,8827);
         phrases[27] = new Phrase(28,"Mark Twain: \"No hay una visión más triste que la de un joven pesimista\".",true,9928,8828);
     }
-
+    private int generateRandomNum(int min, int max) {
+        Random random = new Random();
+        return random.nextInt((max - min) + 1) + min;
+    }
     public void randomPhrase(View view) {
 
         // Declarar variables
@@ -66,20 +69,28 @@ public class MainActivity extends AppCompatActivity {
         TextView txtPhrase = findViewById(R.id.txtPhrase);
         int randomNumber;
         int posArray;
+        boolean anyPhraseHab = false;
 
-        // Generar un numero aleatorio del 1 al 28 que este habilitado
-        do {
-            randomNumber = generateRandomNum(1, 28);
-            posArray = randomNumber - 1;
-        } while (!phrasesStance[posArray].isHab());
+        for (Phrase phrase : phrasesStance) { //Recorrer el array
+            if (phrase.isHab()) {             //Si alguno esta habilitado
+                anyPhraseHab = true;
+                break;
+            }
+        }
+        if (anyPhraseHab) {
+            // Generar un numero aleatorio del 1 al 28 que este habilitado
+            do {
+                randomNumber = generateRandomNum(1, 28);
+                posArray = randomNumber - 1;
+            } while (!phrasesStance[posArray].isHab());
 
-        txtRandomNum.setText(String.valueOf(randomNumber)); //Muesta el numero generado
-        txtPhrase.setText(phrasesStance[posArray].getPhrase()); //Muestra la frase designada
-        phrasesStance[posArray].changeHab();//Deshabilita la frase
+            txtRandomNum.setText(String.valueOf(randomNumber)); //Muesta el numero generado
+            txtPhrase.setText(phrasesStance[posArray].getPhrase()); //Muestra la frase designada
+            phrasesStance[posArray].changeHab();//Deshabilita la frase
+        } else {
+            txtRandomNum.setText("0");
+            txtPhrase.setText("Todas las frases han sido utilizadas.");
+        }
     }
 
-    private int generateRandomNum(int min, int max) {
-        Random random = new Random();
-        return random.nextInt((max - min) + 1) + min;
-    }
 }
