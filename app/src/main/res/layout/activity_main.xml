@@ -34,18 +34,19 @@
         android:id="@+id/txtRandomNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:layout_marginTop="40dp"
+        android:hint="Random Number"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnGenerate" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="102dp"
         android:layout_height="129dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/bottomNavigationView"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="602dp">
+        app:layout_constraintStart_toStartOf="parent">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
@@ -53,8 +54,8 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="103dp"
         android:layout_height="129dp"
-        app:layout_constraintEnd_toStartOf="@+id/bottomNavigationView2"
-        tools:layout_editor_absoluteY="602dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bottomNavigationView2">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
@@ -62,8 +63,8 @@
         android:id="@+id/bottomNavigationView2"
         android:layout_width="103dp"
         android:layout_height="129dp"
-        app:layout_constraintEnd_toStartOf="@+id/bottomNavigationView3"
-        tools:layout_editor_absoluteY="602dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bottomNavigationView3">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
@@ -71,7 +72,17 @@
         android:id="@+id/bottomNavigationView3"
         android:layout_width="103dp"
         android:layout_height="129dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/txtPhrase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="Phrase"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="602dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRandomNum" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
