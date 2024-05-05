@@ -55,12 +55,14 @@ public class MainActivity extends AppCompatActivity {
                 "Herman Hesse: \"El pájaro pelea hasta que consigue salir del huevo. El huevo es su mundo. Todo ser viviente debería intentar destruir el mundo\".",
                 "Mark Twain: \"No hay una visión más triste que la de un joven pesimista\"."
         };
+        //Crear instancia de "phrases" para modificar el array
+        String[] phrasesStance = phrases;
 
         // Generar un numero aleatorio del 1 al 28
         int randomNumber = generateRandomNum(1, 28);
         // Mostrar el numero aleatorio y frase en los TextView
         txtRandomNum.setText(String.valueOf(randomNumber));
-        txtPhrase.setText(phrases[randomNumber - 1]);
+        txtPhrase.setText(phrasesStance[randomNumber - 1]);
     }
 
     private int generateRandomNum(int min, int max) {
