@@ -17,13 +17,16 @@ import com.example.oratoriarandomizer.Phrase;
 public class MainActivity extends AppCompatActivity {
 
     Phrase[] phrases = new Phrase[28];
-    Phrase[] phrasesStance = phrases;
+    TextView txtPhrase;
+    TextView txtRandomNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        txtPhrase = findViewById(R.id.txtPhrase);
+        txtRandomNum = findViewById(R.id.txtRandomNum);
         initializePhrases();
     }
 
@@ -64,14 +67,11 @@ public class MainActivity extends AppCompatActivity {
     public void randomPhrase(View view) {
 
         // Declarar variables
-        Button btnGenerate = findViewById(R.id.btnGenerate);
-        TextView txtRandomNum = findViewById(R.id.txtRandomNum);
-        TextView txtPhrase = findViewById(R.id.txtPhrase);
         int randomNumber;
         int posArray;
         boolean anyPhraseHab = false;
 
-        for (Phrase phrase : phrasesStance) { //Recorrer el array
+        for (Phrase phrase : phrases) { //Recorrer el array
             if (phrase.isHab()) {             //Si alguno esta habilitado
                 anyPhraseHab = true;
                 break;
@@ -82,15 +82,21 @@ public class MainActivity extends AppCompatActivity {
             do {
                 randomNumber = generateRandomNum(1, 28);
                 posArray = randomNumber - 1;
-            } while (!phrasesStance[posArray].isHab());
+            } while (!phrases[posArray].isHab());
 
             txtRandomNum.setText(String.valueOf(randomNumber)); //Muesta el numero generado
-            txtPhrase.setText(phrasesStance[posArray].getPhrase()); //Muestra la frase designada
-            phrasesStance[posArray].changeHab();//Deshabilita la frase
+            txtPhrase.setText(phrases[posArray].getPhrase()); //Muestra la frase designada
+            phrases[posArray].changeHab();//Deshabilita la frase
         } else {
-            txtRandomNum.setText("0");
+            txtRandomNum.setText(" ");
             txtPhrase.setText("Todas las frases han sido utilizadas.");
         }
     }
-
+    public void resetPhrases(View view) {
+        for (Phrase phrase : phrases) { //Recorrer el array
+            if(!phrase.isHab()) { phrase.changeHab(); }
+        }
+        txtRandomNum.setText(" ");
+        txtPhrase.setText("Las frases han sido refrescadas");
+    }
 }
