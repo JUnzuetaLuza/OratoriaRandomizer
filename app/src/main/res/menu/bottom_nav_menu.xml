@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Orden"
+    <item
+        android:title="Orden"
         android:icon="@drawable/baseline_format_list_numbered_24"
         android:id="@+id/orden" />
-    <item android:title="Frase Célebre"
+    <item
+        android:title="Frase Célebre"
         android:icon="@drawable/baseline_face_retouching_natural_24"
         android:id="@+id/frase" />
-    <item android:title="Temática"
+    <item
+        android:title="Temática"
         android:icon="@drawable/baseline_forum_24"
         android:id="@+id/tematica" />
-    <item android:title="Ronda Aleatoria"
+    <item
+        android:title="Ronda Aleatoria"
         android:icon="@drawable/baseline_camera_24"
         android:id="@+id/ronda" />
 </menu>
