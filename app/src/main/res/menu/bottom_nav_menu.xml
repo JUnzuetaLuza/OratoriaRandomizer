@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="Orden"
+        android:id="@+id/orden"
         android:icon="@drawable/baseline_format_list_numbered_24"
-        android:id="@+id/orden" />
+        android:title="Orden"/>
     <item
-        android:title="Frase Célebre"
+        android:id="@+id/frase"
         android:icon="@drawable/baseline_face_retouching_natural_24"
-        android:id="@+id/frase" />
+        android:title="Frase Célebre"/>
     <item
-        android:title="Temática"
+        android:id="@+id/tematica"
         android:icon="@drawable/baseline_forum_24"
-        android:id="@+id/tematica" />
+        android:title="Temática"/>
     <item
-        android:title="Ronda Aleatoria"
+        android:id="@+id/ronda"
         android:icon="@drawable/baseline_camera_24"
-        android:id="@+id/ronda" />
+        android:title="Ronda Aleatoria" />
 </menu>
