@@ -14,17 +14,9 @@ import java.util.Random;
 
 public class RondaFragment extends Fragment {
 
-    //String orden[] = {
-    //        "Economía",
-    //        "Administración de negocios globales",
-    //        "Marketing y administración comercial",
-    //        "Turismo, Hotelería y Gastronomía",
-    //        "Administración y Gerencia",
-    //        "Contabilidad y Finanzas"
-    //};
     Phrase[] phrases = new Phrase[6];
     TextView txtPhrase;
-    TextView txtRandomNum;
+    //TextView txtRandomNum;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,7 +25,7 @@ public class RondaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_ronda, container, false);
 
         txtPhrase = view.findViewById(R.id.txtPhraseRonda);
-        txtRandomNum = view.findViewById(R.id.txtRandomNumRonda);
+        //txtRandomNum = view.findViewById(R.id.txtRandomNumRonda);
 
         Button btnRandom = view.findViewById(R.id.btnRandomRonda);
         Button btnReset = view.findViewById(R.id.btnResetRonda);
@@ -86,11 +78,11 @@ public class RondaFragment extends Fragment {
                 posArray = randomNumber - 1;
             } while (!phrases[posArray].isHab());
 
-            txtRandomNum.setText(String.valueOf(randomNumber)); //Muesta el numero generado
+            //txtRandomNum.setText(String.valueOf(randomNumber)); //Muesta el numero generado
             txtPhrase.setText(phrases[posArray].getPhrase()); //Muestra la frase designada
             phrases[posArray].changeHab();//Deshabilita la frase
         } else {
-            txtRandomNum.setText(" ");
+            //txtRandomNum.setText(" ");
             txtPhrase.setText("Todas las rondas han sido realizadas.");
         }
     }
@@ -98,7 +90,7 @@ public class RondaFragment extends Fragment {
         for (Phrase phrase : phrases) { //Recorrer el array
             if(!phrase.isHab()) { phrase.changeHab(); }
         }
-        txtRandomNum.setText(" ");
+        //txtRandomNum.setText(" ");
         txtPhrase.setText("Las rondas han sido refrescadas");
     }
 }

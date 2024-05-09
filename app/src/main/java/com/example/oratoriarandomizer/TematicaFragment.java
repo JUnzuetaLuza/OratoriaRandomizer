@@ -16,7 +16,7 @@ public class TematicaFragment extends Fragment {
 
     Phrase[] phrases = new Phrase[10];
     TextView txtPhrase;
-    TextView txtRandomNum;
+    //TextView txtRandomNum;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,7 +25,7 @@ public class TematicaFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tematica, container, false);
 
         txtPhrase = view.findViewById(R.id.txtPhraseTematica);
-        txtRandomNum = view.findViewById(R.id.txtRandomNumTematica);
+        //txtRandomNum = view.findViewById(R.id.txtRandomNumTematica);
 
         Button btnRandom = view.findViewById(R.id.btnRandomTematica);
         Button btnReset = view.findViewById(R.id.btnResetTematica);
@@ -82,11 +82,11 @@ public class TematicaFragment extends Fragment {
                 posArray = randomNumber - 1;
             } while (!phrases[posArray].isHab());
 
-            txtRandomNum.setText(String.valueOf(randomNumber)); //Muesta el numero generado
+            //txtRandomNum.setText(String.valueOf(randomNumber)); //Muesta el numero generado
             txtPhrase.setText(phrases[posArray].getPhrase()); //Muestra la frase designada
             phrases[posArray].changeHab();//Deshabilita la frase
         } else {
-            txtRandomNum.setText(" ");
+            //txtRandomNum.setText(" ");
             txtPhrase.setText("Todas las temáticas han sido utilizadas.");
         }
     }
@@ -94,7 +94,7 @@ public class TematicaFragment extends Fragment {
         for (Phrase phrase : phrases) { //Recorrer el array
             if(!phrase.isHab()) { phrase.changeHab(); }
         }
-        txtRandomNum.setText(" ");
+        //txtRandomNum.setText(" ");
         txtPhrase.setText("Las temáticas han sido refrescadas");
     }
 }

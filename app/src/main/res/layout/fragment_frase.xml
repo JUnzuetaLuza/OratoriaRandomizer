@@ -6,13 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".FraseFragment">
 
-    <EditText
-        android:id="@+id/editTextText"
+    <TextView
+        android:id="@+id/txtViewFrase"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
+        android:background="#6750A3"
         android:text="Frase Célebre"
+        android:textColor="#FFFFFF"
+        android:textSize="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -28,26 +32,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
-
-    <TextView
-        android:id="@+id/txtRandomNumFrase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:hint="Random Number"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRandomFrase" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewFrase" />
 
     <TextView
         android:id="@+id/txtPhraseFrase"
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginTop="150dp"
-        android:hint="Phrase"
+        android:hint="Frase"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -66,9 +58,9 @@
         android:onClick="resetPhrases"
         android:text="Reset"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.956"
-        app:layout_constraintStart_toEndOf="@+id/txtRandomNumFrase"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintHorizontal_bias="0.996"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewFrase" />
 
     <Button
         android:id="@+id/btnBackFrase"
@@ -79,9 +71,6 @@
         android:width="100dp"
         android:height="100dp"
         android:background="@drawable/button_circle"
-        android:text="Back"
-        app:layout_constraintEnd_toStartOf="@+id/txtRandomNumFrase"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewFrase" />
 </androidx.constraintlayout.widget.ConstraintLayout>

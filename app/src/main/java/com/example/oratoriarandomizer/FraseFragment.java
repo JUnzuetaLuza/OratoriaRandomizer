@@ -16,7 +16,7 @@ public class FraseFragment extends Fragment {
 
     Phrase[] phrases = new Phrase[28];
     TextView txtPhrase;
-    TextView txtRandomNum;
+    //TextView txtRandomNum;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,7 +25,7 @@ public class FraseFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_frase, container, false);
 
         txtPhrase = view.findViewById(R.id.txtPhraseFrase);
-        txtRandomNum = view.findViewById(R.id.txtRandomNumFrase);
+        //txtRandomNum = view.findViewById(R.id.txtRandomNumFrase);
 
         Button btnRandom = view.findViewById(R.id.btnRandomFrase);
         Button btnReset = view.findViewById(R.id.btnResetFrase);
@@ -100,11 +100,11 @@ public class FraseFragment extends Fragment {
                 posArray = randomNumber - 1;
             } while (!phrases[posArray].isHab());
 
-            txtRandomNum.setText(String.valueOf(randomNumber)); //Muesta el numero generado
+            //txtRandomNum.setText(String.valueOf(randomNumber)); //Muesta el numero generado
             txtPhrase.setText(phrases[posArray].getPhrase()); //Muestra la frase designada
             phrases[posArray].changeHab();//Deshabilita la frase
         } else {
-            txtRandomNum.setText(" ");
+            //txtRandomNum.setText(" ");
             txtPhrase.setText("Todas las frases han sido utilizadas.");
         }
     }
@@ -112,7 +112,7 @@ public class FraseFragment extends Fragment {
         for (Phrase phrase : phrases) { //Recorrer el array
             if(!phrase.isHab()) { phrase.changeHab(); }
         }
-        txtRandomNum.setText(" ");
+        //txtRandomNum.setText(" ");
         txtPhrase.setText("Las frases han sido refrescadas");
     }
 }

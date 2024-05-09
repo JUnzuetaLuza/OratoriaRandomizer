@@ -6,13 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".OrdenFragment">
 
-    <EditText
-        android:id="@+id/editTextText"
+    <TextView
+        android:id="@+id/txtViewOrden"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
+        android:background="#6750A3"
         android:text="Orden"
+        android:textColor="#FFFFFF"
+        android:textSize="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -28,25 +32,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
-
-    <TextView
-        android:id="@+id/txtRandomNumOrden"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRandomOrden" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewOrden" />
 
     <TextView
         android:id="@+id/txtPhraseOrden"
-        android:layout_width="150dp"
+        android:layout_width="300dp"
         android:layout_height="250dp"
         android:layout_marginTop="150dp"
-        android:hint="Phrase"
+        android:hint="Orden de Salida: "
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -58,14 +51,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="210dp"
-        android:layout_marginEnd="30dp"
         android:width="100dp"
         android:height="100dp"
         android:background="@drawable/button_circle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.956"
-        app:layout_constraintStart_toEndOf="@+id/txtRandomNumOrden"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtViewOrden" />
 
     <Button
         android:id="@+id/btnBackOrden"
@@ -76,8 +68,7 @@
         android:width="100dp"
         android:height="100dp"
         android:background="@drawable/button_circle"
-        app:layout_constraintEnd_toStartOf="@+id/txtRandomNumOrden"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewOrden" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
