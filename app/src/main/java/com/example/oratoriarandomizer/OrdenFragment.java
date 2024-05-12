@@ -31,19 +31,19 @@ public class OrdenFragment extends Fragment {
         //txtRandomNum = view.findViewById(R.id.txtRandomNumOrden);
 
         Button btnRandom = view.findViewById(R.id.btnRandomOrden);
-        Button btnReset = view.findViewById(R.id.btnResetOrden);
+        //Button btnReset = view.findViewById(R.id.btnResetOrden);
         btnRandom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 randomPhrase(v);
             }
         });
-        btnReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetPhrases(v);
-            }
-        });
+        //btnReset.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+        //        resetPhrases(v);
+        //    }
+        //});
 
         initializePhrases();
 
@@ -84,11 +84,11 @@ public class OrdenFragment extends Fragment {
             txtPhrase.setText("Todas las frases han sido utilizadas.");
         }
     }
-    public void resetPhrases(View view) {
-        for (Phrase phrase : phrases) { //Recorrer el array
-            if(!phrase.isHab()) { phrase.changeHab(); }
-        }
-        //txtRandomNum.setText(" ");
-        txtPhrase.setText("Las frases han sido refrescadas");
-    }
+    //public void resetPhrases(View view) {
+    //    for (Phrase phrase : phrases) { //Recorrer el array
+    //        if(!phrase.isHab()) { phrase.changeHab(); }
+    //    }
+    //    //txtRandomNum.setText(" ");
+    //    txtPhrase.setText("Las frases han sido refrescadas");
+    //}
 }
