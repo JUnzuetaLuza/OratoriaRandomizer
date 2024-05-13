@@ -1,5 +1,6 @@
 package com.example.oratoriarandomizer;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -15,16 +16,19 @@ import java.util.Random;
 public class TematicaFragment extends Fragment {
 
     Phrase[] phrases = new Phrase[10];
-    TextView txtPhrase;
+    TextView txtPhrase1;
+    TextView txtPhrase2;
     //TextView txtRandomNum;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_tematica, container, false);
 
-        txtPhrase = view.findViewById(R.id.txtPhraseTematica);
+        txtPhrase1 = view.findViewById(R.id.txtPhraseTematica1);
+        txtPhrase2 = view.findViewById(R.id.txtPhraseTematica2);
         //txtRandomNum = view.findViewById(R.id.txtRandomNumTematica);
 
         Button btnRandom = view.findViewById(R.id.btnRandomTematica);
@@ -83,11 +87,24 @@ public class TematicaFragment extends Fragment {
             } while (!phrases[posArray].isHab());
 
             //txtRandomNum.setText(String.valueOf(randomNumber)); //Muesta el numero generado
-            txtPhrase.setText(phrases[posArray].getPhrase()); //Muestra la frase designada
+            txtPhrase1.setText(phrases[posArray].getPhrase()); //Muestra la frase designada
             phrases[posArray].changeHab();//Deshabilita la frase
+
+
+            // Generar un numero aleatorio del 1 al 28 que este habilitado
+            do {
+                randomNumber = generateRandomNum(1, 10);
+                posArray = randomNumber - 1;
+            } while (!phrases[posArray].isHab());
+
+            //txtRandomNum.setText(String.valueOf(randomNumber)); //Muesta el numero generado
+            txtPhrase2.setText(phrases[posArray].getPhrase()); //Muestra la frase designada
+            phrases[posArray].changeHab();//Deshabilita la frase
+
         } else {
             //txtRandomNum.setText(" ");
-            txtPhrase.setText("Todas las temáticas han sido utilizadas.");
+            txtPhrase1.setText("Todas las temáticas han sido utilizadas.");
+            txtPhrase2.setText("Todas las temáticas han sido utilizadas.");
         }
     }
     public void resetPhrases(View view) {
@@ -95,6 +112,7 @@ public class TematicaFragment extends Fragment {
             if(!phrase.isHab()) { phrase.changeHab(); }
         }
         //txtRandomNum.setText(" ");
-        txtPhrase.setText("Las temáticas han sido refrescadas");
+        txtPhrase1.setText("Las temáticas han sido refrescadas");
+        txtPhrase2.setText("Las temáticas han sido refrescadas");
     }
 }

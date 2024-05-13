@@ -34,18 +34,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewFrase" />
 
-    <TextView
-        android:id="@+id/txtPhraseFrase"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="150dp"
-        android:hint="Frase"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnRandomFrase" />
-
     <Button
         android:id="@+id/btnResetFrase"
         android:layout_width="wrap_content"
@@ -73,4 +61,42 @@
         android:background="@drawable/button_circle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViewFrase" />
+
+    <TextView
+        android:id="@+id/txtPhraseFrase1"
+        android:layout_width="180dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="120dp"
+        android:hint="Frase 1"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRandomFrase" />
+
+    <TextView
+        android:id="@+id/txtPhraseFrase2"
+        android:layout_width="180dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:hint="Frase 2"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.027"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPhraseFrase1" />
+
+    <TextView
+        android:id="@+id/txtPhraseFrase3"
+        android:layout_width="180dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Frase 3"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.98"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPhraseFrase1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
