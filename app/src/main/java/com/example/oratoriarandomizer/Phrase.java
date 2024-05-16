@@ -34,4 +34,5 @@ public class Phrase {
     public void changeHab() {
         hab = !hab;
     }
+    public void setHab(boolean set) { hab = set; }
 }
