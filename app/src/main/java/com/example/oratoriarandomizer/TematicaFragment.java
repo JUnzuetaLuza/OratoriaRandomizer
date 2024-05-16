@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -29,22 +30,13 @@ public class TematicaFragment extends Fragment {
 
         txtPhrase1 = view.findViewById(R.id.txtPhraseTematica1);
         txtPhrase2 = view.findViewById(R.id.txtPhraseTematica2);
-        //txtRandomNum = view.findViewById(R.id.txtRandomNumTematica);
+        txtPhrase1.setOnClickListener(v -> selectTematica(txtPhrase1));
+        txtPhrase2.setOnClickListener(v -> selectTematica(txtPhrase2));
 
         Button btnRandom = view.findViewById(R.id.btnRandomTematica);
         Button btnReset = view.findViewById(R.id.btnResetTematica);
-        btnRandom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                randomPhrase(v);
-            }
-        });
-        btnReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetPhrases(v);
-            }
-        });
+        btnRandom.setOnClickListener(this::randomPhrase);
+        btnReset.setOnClickListener(this::resetPhrases);
 
         initializePhrases();
 
@@ -69,8 +61,8 @@ public class TematicaFragment extends Fragment {
     public void randomPhrase(View view) {
 
         // Declarar variables
-        int randomNumber;
-        int posArray;
+        int[] randomNumber = new int[2];
+        int[] posArray = new int[2];
         boolean anyPhraseHab = false;
 
         for (Phrase phrase : phrases) { //Recorrer el array
@@ -80,39 +72,54 @@ public class TematicaFragment extends Fragment {
             }
         }
         if (anyPhraseHab) {
-            // Generar un numero aleatorio del 1 al 28 que este habilitado
-            do {
-                randomNumber = generateRandomNum(1, 10);
-                posArray = randomNumber - 1;
-            } while (!phrases[posArray].isHab());
-
-            //txtRandomNum.setText(String.valueOf(randomNumber)); //Muesta el numero generado
-            txtPhrase1.setText(phrases[posArray].getPhrase()); //Muestra la frase designada
-            phrases[posArray].changeHab();//Deshabilita la frase
-
-
-            // Generar un numero aleatorio del 1 al 28 que este habilitado
-            do {
-                randomNumber = generateRandomNum(1, 10);
-                posArray = randomNumber - 1;
-            } while (!phrases[posArray].isHab());
-
-            //txtRandomNum.setText(String.valueOf(randomNumber)); //Muesta el numero generado
-            txtPhrase2.setText(phrases[posArray].getPhrase()); //Muestra la frase designada
-            phrases[posArray].changeHab();//Deshabilita la frase
+            for (int i = 0; i < 2; i++) {
+                // Generar un numero aleatorio del 1 al 28 que este habilitado
+                do {
+                    randomNumber[i] = generateRandomNum(1, 10);
+                } while (contains(randomNumber, randomNumber[i], i) || !phrases[randomNumber[i] - 1].isHab());
+                posArray[i] = randomNumber[i] - 1;
+            }
+            for (int i = 0; i < 2; i++) {
+                int textViewId = getResources().getIdentifier("txtPhraseTematica" + (i + 1), "id", requireContext().getPackageName());
+                TextView textView = requireView().findViewById(textViewId);
+                textView.setText(phrases[posArray[i]].getPhrase());
+            }
 
         } else {
-            //txtRandomNum.setText(" ");
             txtPhrase1.setText("Todas las temáticas han sido utilizadas.");
-            txtPhrase2.setText("Todas las temáticas han sido utilizadas.");
+            txtPhrase2.setText("");
         }
+
     }
+
+    private boolean contains(int[] array, int number, int endIndex) {
+        for (int i = 0; i < endIndex; i++) {
+            if (array[i] == number) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void selectTematica(View view) {
+
+        TextView selectedTextView = (TextView) view;                    // Obtener el TextView seleccionado
+        String selectedPhrase = selectedTextView.getText().toString();  // Obtener el texto de la frase seleccionada
+        for (Phrase phrase : phrases) {                                 // Buscar la frase seleccionada en el array y deshabilitarla
+            if (phrase.getPhrase().equals(selectedPhrase)) {
+                phrase.setHab(false);
+                break;
+            }
+        }
+        // Mostrar un mensaje de confirmación
+        Toast.makeText(getContext(), "Frase seleccionada: " + selectedPhrase, Toast.LENGTH_SHORT).show();
+    }
+
     public void resetPhrases(View view) {
         for (Phrase phrase : phrases) { //Recorrer el array
             if(!phrase.isHab()) { phrase.changeHab(); }
         }
-        //txtRandomNum.setText(" ");
-        txtPhrase1.setText("Las temáticas han sido refrescadas");
+        txtPhrase1.setText("");
         txtPhrase2.setText("Las temáticas han sido refrescadas");
     }
 }
