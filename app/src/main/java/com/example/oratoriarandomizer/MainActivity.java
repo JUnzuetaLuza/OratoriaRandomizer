@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.ronda:
                     replaceFragment(new RondaFragment());
                     break;
+                case R.id.discurso:
+                    replaceFragment(new DiscursoFragment());
+                    break;
             }
 
             return true;

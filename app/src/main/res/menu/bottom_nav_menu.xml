@@ -7,7 +7,7 @@
         android:title="Orden"/>
     <item
         android:id="@+id/frase"
-        android:icon="@drawable/baseline_face_retouching_natural_24"
+        android:icon="@drawable/baseline_format_quote_24"
         android:title="Frase Célebre"/>
     <item
         android:id="@+id/tematica"
@@ -17,4 +17,8 @@
         android:id="@+id/ronda"
         android:icon="@drawable/baseline_camera_24"
         android:title="Ronda Aleatoria" />
+    <item
+        android:id="@+id/discurso"
+        android:icon="@drawable/baseline_face_retouching_natural_24"
+        android:title="Tipo de Discurso" />
 </menu>

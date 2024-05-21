@@ -12,21 +12,21 @@ import android.widget.TextView;
 
 import java.util.Random;
 
-public class RondaFragment extends Fragment {
+public class DiscursoFragment extends Fragment {
 
-    Phrase[] phrases = new Phrase[6];
+    Phrase[] phrases = new Phrase[5];
     TextView txtPhrase;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_ronda, container, false);
+        View view = inflater.inflate(R.layout.fragment_discurso, container, false);
 
-        txtPhrase = view.findViewById(R.id.txtPhraseRonda);
+        txtPhrase = view.findViewById(R.id.txtPhraseDiscurso);
 
-        Button btnRandom = view.findViewById(R.id.btnRandomRonda);
-        Button btnReset = view.findViewById(R.id.btnResetRonda);
+        Button btnRandom = view.findViewById(R.id.btnRandomDiscurso);
+        Button btnReset = view.findViewById(R.id.btnResetDiscurso);
         btnRandom.setOnClickListener(this::randomPhrase);
         btnReset.setOnClickListener(this::resetPhrases);
 
@@ -34,13 +34,12 @@ public class RondaFragment extends Fragment {
         return view;
     }
     public void initializePhrases() {
-        phrases[0] = new Phrase(1,"Pensamientos Encarnados",true,9901,8801);
-        phrases[1] = new Phrase(2,"Duelo de Discursos",true,9902,8802);
-        phrases[2] = new Phrase(3,"El Reloj del Mundo",true,9903,8803);
-        phrases[3] = new Phrase(4,"La Rueda de las Perspectivas",true,9904,8804);
-        phrases[4] = new Phrase(5,"Historias de Sincronicidad",true,9905,8805);
-        phrases[5] = new Phrase(6,"Transformando Desafíos",true,9906,8806);
-   }
+        phrases[0] = new Phrase(1,"Narrativo",true,9901,8801);
+        phrases[1] = new Phrase(2,"Expositivo",true,9902,8802);
+        phrases[2] = new Phrase(3,"Argumentativo",true,9903,8803);
+        phrases[3] = new Phrase(4,"Informativo",true,9904,8804);
+        phrases[4] = new Phrase(5,"Publicitario",true,9905,8805);
+    }
     private int generateRandomNum(int min, int max) {
         Random random = new Random();
         return random.nextInt((max - min) + 1) + min;
@@ -59,20 +58,20 @@ public class RondaFragment extends Fragment {
         }
         if (anyPhraseHab) {
             do {
-                randomNumber = generateRandomNum(1, 6);
+                randomNumber = generateRandomNum(1, 5);
                 posArray = randomNumber - 1;
             } while (!phrases[posArray].isHab());
 
             txtPhrase.setText(phrases[posArray].getPhrase());
             phrases[posArray].changeHab();
         } else {
-            txtPhrase.setText("Todas las rondas han sido realizadas.");
+            txtPhrase.setText("Todas los tipos de discurso han sido utilizados.");
         }
     }
     public void resetPhrases(View view) {
         for (Phrase phrase : phrases) {
             if(!phrase.isHab()) { phrase.changeHab(); }
         }
-        txtPhrase.setText("Las rondas han sido refrescadas");
+        txtPhrase.setText("Los tipos de discurso han sido refrescadas");
     }
 }
