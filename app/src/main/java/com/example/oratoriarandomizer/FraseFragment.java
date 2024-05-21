@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.Random;
 
@@ -121,15 +122,29 @@ public class FraseFragment extends Fragment {
     public void selectPhrase(View view) {
 
         TextView selectedTextView = (TextView) view;                    // Obtener el TextView seleccionado
-        String selectedPhrase = selectedTextView.getText().toString();  // Obtener el texto de la frase seleccionada
-        for (Phrase phrase : phrases) {                                 // Buscar la frase seleccionada en el array y deshabilitarla
-            if (phrase.getPhrase().equals(selectedPhrase)) {
-                phrase.setHab(false);
-                break;
+        String selectedPhrase = selectedTextView.getText().toString();  // Obtener el texto del TextView seleccionado
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Confirmación");
+        builder.setMessage("¿Desea seleccionar esta frase?\n\n" + selectedPhrase);
+        builder.setPositiveButton("Confirmar", ((dialog, which) -> {
+            for (Phrase phrase : phrases) {                                 // Buscar la frase seleccionada en el array y deshabilitarla
+                if (phrase.getPhrase().equals(selectedPhrase)) {
+                    phrase.setHab(false);
+                    break;
+                }
             }
-        }
-        // Mostrar un mensaje de confirmación
-        Toast.makeText(getContext(), "Frase seleccionada: " + selectedPhrase, Toast.LENGTH_SHORT).show();
+
+            txtPhrase1.setText("");
+            txtPhrase2.setText("");
+            txtPhrase3.setText("");
+            // Mostrar un mensaje de confirmación
+            Toast.makeText(getContext(), "Frase seleccionada: " + selectedPhrase, Toast.LENGTH_SHORT).show();
+        }));
+        builder.setNegativeButton("Cancelar", ((dialog, which) -> dialog.dismiss()));
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public void resetPhrases(View view) {
