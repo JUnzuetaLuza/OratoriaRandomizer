@@ -13,6 +13,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import java.util.Random;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 public class FraseFragment extends Fragment {
 
@@ -73,6 +75,12 @@ public class FraseFragment extends Fragment {
         phrases[25] = new Phrase(26,"Fyodor Dostoyevski:\n \"El hombre se complace en enumerar sus pesares, pero no enumera sus alegrías\".",true,9926,8826);
         phrases[26] = new Phrase(27,"Herman Hesse:\n \"El pájaro pelea hasta que consigue salir del huevo. El huevo es su mundo. Todo ser viviente debería intentar destruir el mundo\".",true,9927,8827);
         phrases[27] = new Phrase(28,"Mark Twain:\n \"No hay una visión más triste que la de un joven pesimista\".",true,9928,8828);
+
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        for (Phrase phrase : phrases) {
+            boolean isHab = sharedPreferences.getBoolean("phrase_" + phrase.getId(), true);
+            phrase.setHab(isHab);
+        }
     }
     private int generateRandomNum(int min, int max) {
         Random random = new Random();
@@ -131,6 +139,7 @@ public class FraseFragment extends Fragment {
             for (Phrase phrase : phrases) {                                 // Buscar la frase seleccionada en el array y deshabilitarla
                 if (phrase.getPhrase().equals(selectedPhrase)) {
                     phrase.setHab(false);
+                    savePhraseState(phrase);
                     break;
                 }
             }
@@ -138,7 +147,7 @@ public class FraseFragment extends Fragment {
             txtPhrase1.setText("");
             txtPhrase2.setText("");
             txtPhrase3.setText("");
-            // Mostrar un mensaje de confirmación
+
             Toast.makeText(getContext(), "Frase seleccionada: " + selectedPhrase, Toast.LENGTH_SHORT).show();
         }));
         builder.setNegativeButton("Cancelar", ((dialog, which) -> dialog.dismiss()));
@@ -147,10 +156,23 @@ public class FraseFragment extends Fragment {
         dialog.show();
     }
 
+    private void savePhraseState(Phrase phrase) {
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("phrase_" + phrase.getId(), phrase.isHab());
+        editor.apply();
+    }
+
     public void resetPhrases(View view) {
-        for (Phrase phrase : phrases) { //Recorrer el array
-            if(!phrase.isHab()) { phrase.changeHab(); }
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        for (Phrase phrase : phrases) {
+            phrase.setHab(true);
+            editor.putBoolean("phrase_" + phrase.getId(), true);
         }
+        editor.apply();
+
         txtPhrase1.setText("Las frases han sido refrescadas");
         txtPhrase2.setText("");
         txtPhrase3.setText("");
