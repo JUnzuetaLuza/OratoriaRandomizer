@@ -46,6 +46,11 @@ public class FraseFragment extends Fragment {
 
         return view;
     }
+
+    private SharedPreferences getSharedPreferences() {
+        return requireActivity().getSharedPreferences("FraseFragmentPreferences", Context.MODE_PRIVATE);
+    }
+
     public void initializePhrases() {
         phrases[0] = new Phrase(1,"Epícuro:\n \"Cuanto más grande es la dificultad, más gloria hay en superarla\".",true,9901,8801);
         phrases[1] = new Phrase(2,"Soren Kierkegaard:\n \"La vida debe ser comprendida hacia atrás. Pero debe ser vivida hacia delante\".",true,9902,8802);
@@ -76,7 +81,7 @@ public class FraseFragment extends Fragment {
         phrases[26] = new Phrase(27,"Herman Hesse:\n \"El pájaro pelea hasta que consigue salir del huevo. El huevo es su mundo. Todo ser viviente debería intentar destruir el mundo\".",true,9927,8827);
         phrases[27] = new Phrase(28,"Mark Twain:\n \"No hay una visión más triste que la de un joven pesimista\".",true,9928,8828);
 
-        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences();
         for (Phrase phrase : phrases) {
             boolean isHab = sharedPreferences.getBoolean("phrase_" + phrase.getId(), true);
             phrase.setHab(isHab);
@@ -92,12 +97,19 @@ public class FraseFragment extends Fragment {
         int[] randomNumber = new int[3];
         int[] posArray = new int[3];
         boolean anyPhraseHab = false;
+        int habCount = 0;
 
-        for (Phrase phrase : phrases) { //Recorrer el array
-            if (phrase.isHab()) {       //Si alguno esta habilitado
+        for (Phrase phrase : phrases) {
+            if (phrase.isHab()) {
                 anyPhraseHab = true;
-                break;
+                habCount++;
             }
+        }
+        if (habCount < 3) {
+            txtPhrase1.setText("No hay suficientes frases disponibles.");
+            txtPhrase2.setText("");
+            txtPhrase3.setText("");
+            return;
         }
         if (anyPhraseHab) {
             for (int i = 0; i < 3; i++) {
@@ -111,10 +123,6 @@ public class FraseFragment extends Fragment {
                 TextView textView = requireView().findViewById(textViewId);
                 textView.setText(phrases[posArray[i]].getPhrase());
             }
-        } else {
-            txtPhrase1.setText("Todas las frases han sido utilizadas");
-            txtPhrase2.setText("");
-            txtPhrase3.setText("");
         }
     }
 
@@ -129,17 +137,17 @@ public class FraseFragment extends Fragment {
 
     public void selectPhrase(View view) {
 
-        TextView selectedTextView = (TextView) view;                    // Obtener el TextView seleccionado
-        String selectedPhrase = selectedTextView.getText().toString();  // Obtener el texto del TextView seleccionado
+        TextView selectedTextView = (TextView) view;
+        String selectedPhrase = selectedTextView.getText().toString();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
         builder.setTitle("Confirmación");
         builder.setMessage("¿Desea seleccionar esta frase?\n\n" + selectedPhrase);
         builder.setPositiveButton("Confirmar", ((dialog, which) -> {
-            for (Phrase phrase : phrases) {                                 // Buscar la frase seleccionada en el array y deshabilitarla
+            for (Phrase phrase : phrases) {
                 if (phrase.getPhrase().equals(selectedPhrase)) {
                     phrase.setHab(false);
-                    savePhraseState(phrase);
+                    saveFraseState(phrase);
                     break;
                 }
             }
@@ -156,15 +164,15 @@ public class FraseFragment extends Fragment {
         dialog.show();
     }
 
-    private void savePhraseState(Phrase phrase) {
-        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+    private void saveFraseState(Phrase phrase) {
+        SharedPreferences sharedPreferences = getSharedPreferences();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("phrase_" + phrase.getId(), phrase.isHab());
         editor.apply();
     }
 
     public void resetPhrases(View view) {
-        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences();
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         for (Phrase phrase : phrases) {

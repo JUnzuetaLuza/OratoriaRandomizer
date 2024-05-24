@@ -14,13 +14,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import java.util.Random;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 public class TematicaFragment extends Fragment {
 
     Phrase[] phrases = new Phrase[10];
     TextView txtPhrase1;
     TextView txtPhrase2;
-    //TextView txtRandomNum;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -43,6 +44,11 @@ public class TematicaFragment extends Fragment {
 
         return view;
     }
+
+    private SharedPreferences getSharedPreferences() {
+        return requireActivity().getSharedPreferences("TematicaFragmentPreferences", Context.MODE_PRIVATE);
+    }
+
     public void initializePhrases() {
         phrases[0] = new Phrase(1,"Conocimiento",true,9901,8801);
         phrases[1] = new Phrase(2,"Futuro",true,9902,8802);
@@ -54,6 +60,12 @@ public class TematicaFragment extends Fragment {
         phrases[7] = new Phrase(8,"Inspiración",true,9908,8808);
         phrases[8] = new Phrase(9,"Vida",true,9909,8809);
         phrases[9] = new Phrase(10,"Cultura",true,9910,8810);
+
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        for (Phrase phrase : phrases) {
+            boolean isHab = sharedPreferences.getBoolean("phrase_" + phrase.getId(), true);
+            phrase.setHab(isHab);
+        }
     }
     private int generateRandomNum(int min, int max) {
         Random random = new Random();
@@ -61,20 +73,24 @@ public class TematicaFragment extends Fragment {
     }
     public void randomPhrase(View view) {
 
-        // Declarar variables
         int[] randomNumber = new int[2];
         int[] posArray = new int[2];
         boolean anyPhraseHab = false;
+        int habCount = 0;
 
-        for (Phrase phrase : phrases) { //Recorrer el array
-            if (phrase.isHab()) {             //Si alguno esta habilitado
+        for (Phrase phrase : phrases) {
+            if (phrase.isHab()) {
                 anyPhraseHab = true;
-                break;
+                habCount++;
             }
+        }
+        if (habCount < 2) {
+            txtPhrase1.setText("No hay suficientes temáticas disponibles.");
+            txtPhrase2.setText("");
+            return;
         }
         if (anyPhraseHab) {
             for (int i = 0; i < 2; i++) {
-                // Generar un numero aleatorio del 1 al 28 que este habilitado
                 do {
                     randomNumber[i] = generateRandomNum(1, 10);
                 } while (contains(randomNumber, randomNumber[i], i) || !phrases[randomNumber[i] - 1].isHab());
@@ -85,12 +101,7 @@ public class TematicaFragment extends Fragment {
                 TextView textView = requireView().findViewById(textViewId);
                 textView.setText(phrases[posArray[i]].getPhrase());
             }
-
-        } else {
-            txtPhrase1.setText("Todas las temáticas han sido utilizadas.");
-            txtPhrase2.setText("");
         }
-
     }
 
     private boolean contains(int[] array, int number, int endIndex) {
@@ -114,11 +125,13 @@ public class TematicaFragment extends Fragment {
             for (Phrase phrase : phrases) {
                 if (phrase.getPhrase().equals(selectedPhrase)) {
                     phrase.setHab(false);
+                    saveTematicaState(phrase);
                     break;
                 }
             }
             txtPhrase1.setText("");
             txtPhrase2.setText("");
+
             Toast.makeText(getContext(), "Temática seleccionada: " + selectedPhrase, Toast.LENGTH_SHORT).show();
         }));
         builder.setNegativeButton("Cancelar", ((dialog, which) -> dialog.dismiss()));
@@ -127,10 +140,23 @@ public class TematicaFragment extends Fragment {
         dialog.show();
     }
 
+    private void saveTematicaState(Phrase phrase) {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean("phrase_" + phrase.getId(), phrase.isHab());
+        editor.apply();
+    }
+
     public void resetPhrases(View view) {
-        for (Phrase phrase : phrases) { //Recorrer el array
-            if(!phrase.isHab()) { phrase.changeHab(); }
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        for (Phrase phrase : phrases) {
+            phrase.setHab(true);
+            editor.putBoolean("phrase_" + phrase.getId(), true);
         }
+        editor.apply();
+
         txtPhrase1.setText("");
         txtPhrase2.setText("Las temáticas han sido refrescadas");
     }
