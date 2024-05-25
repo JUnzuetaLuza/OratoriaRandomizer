@@ -33,7 +33,6 @@ public class RondaFragment extends Fragment {
         btnReset.setOnClickListener(this::resetPhrases);
 
         initializePhrases();
-
         return view;
     }
 
@@ -42,12 +41,12 @@ public class RondaFragment extends Fragment {
     }
 
     public void initializePhrases() {
-        phrases[0] = new Phrase(1,"Pensamientos Encarnados",true,9901,8801);
-        phrases[1] = new Phrase(2,"Duelo de Discursos",true,9902,8802);
-        phrases[2] = new Phrase(3,"El Reloj del Mundo",true,9903,8803);
-        phrases[3] = new Phrase(4,"La Rueda de las Perspectivas",true,9904,8804);
-        phrases[4] = new Phrase(5,"Historias de Sincronicidad",true,9905,8805);
-        phrases[5] = new Phrase(6,"Transformando Desafíos",true,9906,8806);
+        phrases[0] = new Phrase(1,"Pensamientos Encarnados",true);
+        phrases[1] = new Phrase(2,"Duelo de Discursos",true);
+        phrases[2] = new Phrase(3,"El Reloj del Mundo",true);
+        phrases[3] = new Phrase(4,"La Rueda de las Perspectivas",true);
+        phrases[4] = new Phrase(5,"Historias de Sincronicidad",true);
+        phrases[5] = new Phrase(6,"Transformando Desafíos",true);
 
         SharedPreferences sharedPreferences = getSharedPreferences();
         for (Phrase phrase : phrases) {

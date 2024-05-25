@@ -41,11 +41,11 @@ public class DiscursoFragment extends Fragment {
     }
 
     public void initializePhrases() {
-        phrases[0] = new Phrase(1,"Narrativo",true,9901,8801);
-        phrases[1] = new Phrase(2,"Expositivo",true,9902,8802);
-        phrases[2] = new Phrase(3,"Argumentativo",true,9903,8803);
-        phrases[3] = new Phrase(4,"Informativo",true,9904,8804);
-        phrases[4] = new Phrase(5,"Publicitario",true,9905,8805);
+        phrases[0] = new Phrase(1,"Narrativo",true);
+        phrases[1] = new Phrase(2,"Expositivo",true);
+        phrases[2] = new Phrase(3,"Argumentativo",true);
+        phrases[3] = new Phrase(4,"Informativo",true);
+        phrases[4] = new Phrase(5,"Publicitario",true);
 
         SharedPreferences sharedPreferences = getSharedPreferences();
         for (Phrase phrase : phrases) {

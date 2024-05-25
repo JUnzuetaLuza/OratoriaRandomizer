@@ -41,7 +41,6 @@ public class TematicaFragment extends Fragment {
         btnReset.setOnClickListener(this::resetPhrases);
 
         initializePhrases();
-
         return view;
     }
 
@@ -50,16 +49,16 @@ public class TematicaFragment extends Fragment {
     }
 
     public void initializePhrases() {
-        phrases[0] = new Phrase(1,"Conocimiento",true,9901,8801);
-        phrases[1] = new Phrase(2,"Futuro",true,9902,8802);
-        phrases[2] = new Phrase(3,"Tecnología",true,9903,8803);
-        phrases[3] = new Phrase(4,"Desarrollo",true,9904,8804);
-        phrases[4] = new Phrase(5,"Educación",true,9905,8805);
-        phrases[5] = new Phrase(6,"Emprendimiento",true,9906,8806);
-        phrases[6] = new Phrase(7,"Motivación",true,9907,8807);
-        phrases[7] = new Phrase(8,"Inspiración",true,9908,8808);
-        phrases[8] = new Phrase(9,"Vida",true,9909,8809);
-        phrases[9] = new Phrase(10,"Cultura",true,9910,8810);
+        phrases[0] = new Phrase(1,"Conocimiento",true);
+        phrases[1] = new Phrase(2,"Futuro",true);
+        phrases[2] = new Phrase(3,"Tecnología",true);
+        phrases[3] = new Phrase(4,"Desarrollo",true);
+        phrases[4] = new Phrase(5,"Educación",true);
+        phrases[5] = new Phrase(6,"Emprendimiento",true);
+        phrases[6] = new Phrase(7,"Motivación",true);
+        phrases[7] = new Phrase(8,"Inspiración",true);
+        phrases[8] = new Phrase(9,"Vida",true);
+        phrases[9] = new Phrase(10,"Cultura",true);
 
         SharedPreferences sharedPreferences = getSharedPreferences();
         for (Phrase phrase : phrases) {
