@@ -91,9 +91,15 @@ public class DiscursoFragment extends Fragment {
     }
 
     public void resetPhrases(View view) {
+        SharedPreferences sharedPreferences = getSharedPreferences();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
         for (Phrase phrase : phrases) {
-            if(!phrase.isHab()) { phrase.changeHab(); }
+            phrase.setHab(true);
+            editor.putBoolean("phrase_" + phrase.getId(), true);
         }
+        editor.apply();
+
         txtPhrase.setText("Los tipos de discurso han sido refrescadas");
     }
 }
